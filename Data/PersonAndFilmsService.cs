@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 //using Google.Apis.Json;
@@ -11,7 +12,7 @@ namespace BlazorApp1.Data
 {
     public class PersonAndFilmsService
     {
-        public async Task<string> GetPersonAndFilmsAsync()
+        public async Task<string> GetAsync()
         {
             using var graphQLClient = new GraphQLHttpClient("https://swapi.apis.guru/", new NewtonsoftJsonSerializer());
 
@@ -35,6 +36,7 @@ namespace BlazorApp1.Data
                 }
             };
 
+            
             var graphQLResponse = await graphQLClient.SendQueryAsync<PersonAndFilmsResponse>(personAndFilmsRequest);
             //return await graphQLClient.SendQueryAsync<PersonAndFilmsResponse>(personAndFilmsRequest);
             return (JsonSerializer.Serialize(graphQLResponse, new JsonSerializerOptions { WriteIndented = true }));
