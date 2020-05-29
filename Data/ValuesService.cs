@@ -10,14 +10,11 @@ namespace BlazorApp1.Data
 {
     public class ValuesService
     {
+        static string local = "http://localhost:4001/graphql";
 
         public async Task<Rootobject> GetAsync()
-        {
-            string local = "http://localhost:4001/graphql";
-            
+        {                        
             GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
-
-
 
             var request = new GraphQLRequest
        //     {
