@@ -1,7 +1,3 @@
-using System;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 //using Google.Apis.Json;
@@ -43,12 +39,14 @@ namespace BlazorApp1.Data
                 OperationName = "Dirs"
             };
 
+
+
             JsonSerializerOptions jso = new JsonSerializerOptions
             {
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
 
-            var graphQLResponse = await graphQLClient.SendQueryAsync<ValueResponse>(request);
+            var graphQLResponse = await graphQLClient.SendQueryAsync<Data>(request);
             
             //return System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso);
             return JsonConvert.DeserializeObject<Rootobject>(System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso));
