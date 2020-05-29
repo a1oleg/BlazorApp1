@@ -2,23 +2,28 @@
 @using BlazorApp1.Data
 @inject ValuesService VService
 
-
-<ul>
-    @foreach (var user in users)
+@if (results == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @foreach (string s in results.Data.Dirs)
     {
-        <li>@user</li>
+        @s
     }
-</ul>
-
-
+}
 
 @code {
 
-    private Rootobject forecasts2;
+public Rootobject results { get; set; }
+    [Parameter]
+    public Dictionary<string, string> reqFields { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts2 = await VService.GetAsync();
+        results = await VService.GetAsync();
 
     }
 
@@ -33,6 +38,6 @@
     }
 
 
-}
+    }
 
 

@@ -12,22 +12,22 @@ else
     <table class="table">
         <thead>
 
-            <tr>
+            @*<tr>
                 @foreach (string s in results.Data.Dirs)
                 {
                     <th>@s</th>
                 }
-                </tr>
+            </tr>*@
         </thead>
 
         <tbody>
-            @foreach (string s in results.Data.Dirs)
+            @*@foreach (string s in results.Data.Dirs)
             {
                 <tr>
                     @s
 
                 </tr>
-            }
+            }*@
 
 
         </tbody>
@@ -35,7 +35,7 @@ else
 }
 
 @code {
-
-    public Rootobject results { get; set; }
+    [Parameter]
+    public List<Rootobject> results { get; set; }
 
 }

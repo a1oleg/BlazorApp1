@@ -10,11 +10,12 @@ namespace BlazorApp1.Data
 {
     public class ValuesService
     {
+
         public async Task<Rootobject> GetAsync()
         {
             string local = "http://localhost:4001/graphql";
             
-            using var graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
+            GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
 
 
 
@@ -47,7 +48,7 @@ namespace BlazorApp1.Data
             };
 
             var graphQLResponse = await graphQLClient.SendQueryAsync<Data>(request);
-            
+            graphQLClient.Dispose();
             //return System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso);
             return JsonConvert.DeserializeObject<Rootobject>(System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso));
         }
