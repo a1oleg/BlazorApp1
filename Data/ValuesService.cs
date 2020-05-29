@@ -14,7 +14,7 @@ namespace BlazorApp1.Data
 {
     public class ValuesService
     {
-        public async Task<string> GetAsync()
+        public async Task<Rootobject> GetAsync()
         {
             string local = "http://localhost:4001/graphql";
             
@@ -50,8 +50,8 @@ namespace BlazorApp1.Data
 
             var graphQLResponse = await graphQLClient.SendQueryAsync<ValueResponse>(request);
             
-            return System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso);
-            //return JsonConvert.DeserializeObject<Rootobject>(System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso));
+            //return System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso);
+            return JsonConvert.DeserializeObject<Rootobject>(System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso));
         }
     }
 }

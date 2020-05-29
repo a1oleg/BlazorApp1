@@ -10,7 +10,7 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (forecasts2 == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -28,7 +28,7 @@ else
         <tbody>
             <tr>
 
-                <td>@forecasts</td>
+                @*<td>@forecasts</td>*@
 
             </tr>
             @foreach (var s in forecasts2.Data.Dirs)
@@ -45,12 +45,12 @@ else
 }
 
 @code {
-    private string forecasts;
+    //private string forecasts;
     private Rootobject forecasts2;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await VService.GetAsync();
-        forecasts2 = JsonConvert.DeserializeObject<Rootobject>(await VService.GetAsync());
+        forecasts2 = await VService.GetAsync();
+        //forecasts2 = JsonConvert.DeserializeObject<Rootobject>(await VService.GetAsync());
     }
 }
