@@ -37,8 +37,10 @@ namespace BlazorApp1.Data
             };
 
             
+
             var graphQLResponse = await graphQLClient.SendQueryAsync<PersonAndFilmsResponse>(personAndFilmsRequest);
-            //return await graphQLClient.SendQueryAsync<PersonAndFilmsResponse>(personAndFilmsRequest);
+            
+
             return (JsonSerializer.Serialize(graphQLResponse, new JsonSerializerOptions { WriteIndented = true }));
 
 

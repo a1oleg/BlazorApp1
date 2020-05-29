@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using Newtonsoft.Json;
 
 namespace BlazorApp1.Data
 {
@@ -15,16 +17,12 @@ namespace BlazorApp1.Data
         public async Task<string> GetAsync()
         {
             string local = "http://localhost:4001/graphql";
-            string Pupstagram = "https://dog-graphql-api.glitch.me/graphql";
-            string BTCboost = "https://48p1r2roz4.sse.codesandbox.io";
-
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Encoding enc = Encoding.GetEncoding("utf-8");
-
-
+            
             using var graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
 
-            var personAndFilmsRequest = new GraphQLRequest
+
+
+            var request = new GraphQLRequest
             {
                 Query = @"
 			    query Values($desc: String!) {
@@ -37,9 +35,12 @@ namespace BlazorApp1.Data
                 }
             };
 
-            var graphQLResponse = await graphQLClient.SendQueryAsync<ValueResponse>(personAndFilmsRequest);
-            //return await graphQLClient.SendQueryAsync<PersonAndFilmsResponse>(personAndFilmsRequest);
-            return (JsonSerializer.Serialize(graphQLResponse, new JsonSerializerOptions { WriteIndented = true }));
+            JsonSerializerOptions jso = new JsonSerializerOptions();
+            jso.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+
+            var graphQLResponse = await graphQLClient.SendQueryAsync<ValueResponse>(request);
+            
+            return System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso);
             
         }
     }

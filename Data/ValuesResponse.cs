@@ -8,7 +8,7 @@ namespace BlazorApp1.Data
 
         //public class PersonContent
         //{
-        //    public string Name { get; set; }
+        //    public string TXTLG { get; set; }
 
         //    //public int _id { get; set; }
 
