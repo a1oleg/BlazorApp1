@@ -23,16 +23,24 @@ namespace BlazorApp1.Data
 
 
             var request = new GraphQLRequest
+       //     {
+       //         Query = @"
+			    //query Values($desc: String!) {
+       //             Values(desc: $desc)
+       //           }",
+       //         OperationName = "Values",
+       //         Variables = new
+       //         {
+       //             desc = "Виды работ"
+       //         }
+       //     };
+
             {
                 Query = @"
-			    query Values($desc: String!) {
-                    Values(desc: $desc)
+			    query Dirs {
+                      Dirs
                   }",
-                OperationName = "Values",
-                Variables = new
-                {
-                    desc = "Виды работ"
-                }
+                OperationName = "Dirs"
             };
 
             JsonSerializerOptions jso = new JsonSerializerOptions();

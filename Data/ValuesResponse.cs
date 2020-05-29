@@ -5,24 +5,16 @@ namespace BlazorApp1.Data
     public class ValueResponse
     {
         public List<string>  Values { get; set; }
+        public List<string> Dirs { get; set; }
 
-        //public class PersonContent
-        //{
-        //    public string TXTLG { get; set; }
+        
+    }
 
-        //    //public int _id { get; set; }
+    public class Dir
+    {
+        public string name { get; set; }
+        public string description { get; set; }
 
-        //    public FilmConnectionContent FilmConnection { get; set; }
-
-        //    public class FilmConnectionContent
-        //    {
-        //        public List<FilmContent> Films { get; set; }
-
-        //        public class FilmContent
-        //        {
-        //            public string Title { get; set; }
-        //        }
-        //    }
-        //}
+        public List<string> Values { get; set; }
     }
 }
