@@ -1,6 +1,7 @@
 ﻿@page "/fetchdata"
 
 @using BlazorApp1.Data
+@using Newtonsoft.Json;
 @*@inject WeatherForecastService ForecastService*@
 @*@inject PersonAndFilmsService FilmsService*@
 @inject ValuesService VService
@@ -26,29 +27,30 @@ else
         </thead>
         <tbody>
             <tr>
+
                 <td>@forecasts</td>
-               
 
             </tr>
-
-            @*@foreach (var forecast in forecasts)
+            @foreach (var s in forecasts2.Data.Dirs)
         {
             <tr>
-                <td>@forecast.Date.ToShortDateString()</td>
-                <td>@forecast.TemperatureC</td>
-                <td>@forecast.TemperatureF</td>
-                <td>@forecast.Summary</td>
+                <td>@s</td>
+                
             </tr>
-        }*@
+        }
+
+
         </tbody>
     </table>
 }
 
 @code {
     private string forecasts;
+    private Rootobject forecasts2;
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await VService.GetAsync();
+        forecasts2 = JsonConvert.DeserializeObject<Rootobject>(await VService.GetAsync());
     }
 }

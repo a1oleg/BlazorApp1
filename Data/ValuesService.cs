@@ -43,13 +43,15 @@ namespace BlazorApp1.Data
                 OperationName = "Dirs"
             };
 
-            JsonSerializerOptions jso = new JsonSerializerOptions();
-            jso.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            JsonSerializerOptions jso = new JsonSerializerOptions
+            {
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
 
             var graphQLResponse = await graphQLClient.SendQueryAsync<ValueResponse>(request);
             
             return System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso);
-            
+            //return JsonConvert.DeserializeObject<Rootobject>(System.Text.Json.JsonSerializer.Serialize(graphQLResponse, jso));
         }
     }
 }
