@@ -1,16 +1,38 @@
 ﻿@page "/counter"
+@using BlazorApp1.Data
+@inject ValuesService VService
 
-<h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
+<ul>
+    @foreach (var user in users)
+    {
+        <li>@user</li>
+    }
+</ul>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
 
 @code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
+    private Rootobject forecasts2;
+
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        forecasts2 = await VService.GetAsync();
+
     }
+
+    private string item;
+
+    [Parameter]
+    public EventCallback<string> OnClickCallback { get; set; }
+
+    void OnClick(EventArgs e)
+    {
+        OnClickCallback.InvokeAsync(item);
+    }
+
+
 }
+
+

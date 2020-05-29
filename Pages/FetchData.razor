@@ -1,43 +1,33 @@
 ﻿@page "/fetchdata"
 
 @using BlazorApp1.Data
-@using Newtonsoft.Json;
-@*@inject WeatherForecastService ForecastService*@
-@*@inject PersonAndFilmsService FilmsService*@
 @inject ValuesService VService
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts2 == null)
+@if (results == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
     <table class="table">
-        @*<thead>
+        <thead>
+
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>*@
+                @foreach (string s in results.Data.Dirs)
+                {
+                    <th>@s</th>
+                }
+                </tr>
+        </thead>
+
         <tbody>
-            <tr>
+            @foreach (string s in results.Data.Dirs)
+            {
+                <tr>
+                    @s
 
-                @*<td>@forecasts</td>*@
-
-            </tr>
-            @foreach (var s in forecasts2.Data.Dirs)
-        {
-            <tr>
-                <button class="btn btn-primary" @onclick="OnClickCallback">@s</button>
-                
-            </tr>
-        }
+                </tr>
+            }
 
 
         </tbody>
@@ -46,13 +36,6 @@ else
 
 @code {
 
-    private Rootobject forecasts2;
+    public Rootobject results { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        forecasts2 = await VService.GetAsync();
-
-    }
-    [Parameter]
-    public EventCallback OnClickCallback { get; set; }
 }
