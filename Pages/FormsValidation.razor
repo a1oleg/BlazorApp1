@@ -1,23 +1,23 @@
 ﻿@page "/FormsValidation"
 @using BlazorApp1.Data
 
-<EditForm Model="@exampleModel" OnSubmit="HandleValidSubmit">
-    @*<DataAnnotationsValidator />
-    <ValidationSummary />*@
-    <p>
-        <label>
-            Primary Classification:
-            <InputSelect @bind-Value="@item">
-                <option value="">Select classification ...</option>
-                @foreach (string s in dirs)
-                {
-                    <option value=@s>@s</option>
-                }                
-            </InputSelect>
-        </label>
-    </p>
-
-</EditForm>
+    <EditForm Model="@exampleModel" OnSubmit="HandleValidSubmit">
+        @*<DataAnnotationsValidator />
+        <ValidationSummary />*@
+        <p>
+            <label>
+                Primary Classification:
+                <InputSelect @bind-Value="@item">
+                    <option value="">Select classification ...</option>
+                    @foreach (string s in dirs)
+                    {
+                        <option value=@s>@s</option>
+                    }
+                </InputSelect>
+            </label>
+        </p>
+        <button type="submit">Submit</button>
+    </EditForm>
 
 @code {
     private ExampleModel exampleModel = new ExampleModel();
@@ -29,6 +29,9 @@
 
     private void HandleValidSubmit()
     {
-        Console.WriteLine(item);
+        OnSubmitCallback.InvokeAsync(item);
     }
+
+    [Parameter]
+    public EventCallback<string> OnSubmitCallback { get; set; }
 }

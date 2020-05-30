@@ -8,13 +8,14 @@
 }
 else
 {
-    <FormsValidation dirs="@results.Data.Dirs" />
+    @foreach (string s in reqFields.Keys)
+    {
+        @s
 
-    @*@foreach (string s in results.Data.Dirs)
-        {
-            @s
+    }
+    <FormsValidation dirs="@results.Data.Dirs" OnSubmitCallback="@AddNewDir" />
 
-        }*@
+
 }
 
 @code {
@@ -30,14 +31,15 @@ else
 
     }
 
-    private string item;
 
-    [Parameter]
-    public EventCallback<string> OnClickCallback { get; set; }
 
-    void OnClick(EventArgs e)
+    //[Parameter]
+    //public EventCallback<string> OnClickCallback { get; set; }
+
+    void AddNewDir(string item)
     {
-        OnClickCallback.InvokeAsync(item);
+        reqFields.Add(item, item);
+        //OnClickCallback.InvokeAsync();
     }
 
 
