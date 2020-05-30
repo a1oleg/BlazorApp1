@@ -8,15 +8,18 @@
 }
 else
 {
-    @foreach (string s in results.Data.Dirs)
-    {
-        @s
-    }
+    <FormsValidation dirs="@results.Data.Dirs" />
+
+    @*@foreach (string s in results.Data.Dirs)
+        {
+            @s
+
+        }*@
 }
 
 @code {
 
-public Rootobject results { get; set; }
+    public Rootobject results { get; set; }
     [Parameter]
     public Dictionary<string, string> reqFields { get; set; }
 
@@ -38,6 +41,6 @@ public Rootobject results { get; set; }
     }
 
 
-    }
+}
 
 

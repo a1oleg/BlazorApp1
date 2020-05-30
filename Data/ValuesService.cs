@@ -5,29 +5,24 @@ using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Newtonsoft.Json;
+using BlazorApp1.Pages;
 
 namespace BlazorApp1.Data
 {
     public class ValuesService
-    {
-        static string local = "http://localhost:4001/graphql";
-
-        GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
-
-        public string qu  { get; set; }
-        public ValuesService(string q)
-        {
-            qu = q;
-        }
+    {        
         public async Task<Rootobject> GetAsync()
-        {                        
-            
+        {
+            string local = "http://localhost:4001/graphql";
+
+            GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
+
 
             var request = new GraphQLRequest   
 
             {
                 
-                Query = qu,
+                Query = Index.qu,
        //         @"
 			    //query Dirs {
        //               Dirs

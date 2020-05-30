@@ -1,0 +1,32 @@
+﻿@page "/FormsValidation"
+@using BlazorApp1.Data
+
+<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+            Primary Classification:
+            <InputSelect @bind-Value="exampleModel.Name">
+                <option value="">Select classification ...</option>
+                @foreach (string s in dirs)
+                {
+                    <option value=@s>@s</option>
+                }                
+            </InputSelect>
+        </label>
+    </p>
+
+</EditForm>
+
+@code {
+    private ExampleModel exampleModel = new ExampleModel();
+
+    [Parameter]
+    public List<string> dirs { get; set; }
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+}
