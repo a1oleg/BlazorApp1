@@ -1,7 +1,9 @@
 ﻿@page "/fetchdata"
 
 @using BlazorApp1.Data
-@inject ValuesService VService
+@*@ValuesService VService = new*@ 
+
+@inject ValuesService VService;
 
 @if (results == null)
 {
@@ -13,21 +15,21 @@ else
         <thead>
 
             @*<tr>
-                @foreach (string s in results.Data.Dirs)
-                {
-                    <th>@s</th>
-                }
-            </tr>*@
+                    @foreach (string s in results.Data.Dirs)
+                    {
+                        <th>@s</th>
+                    }
+                </tr>*@
         </thead>
 
         <tbody>
             @*@foreach (string s in results.Data.Dirs)
-            {
-                <tr>
-                    @s
+                {
+                    <tr>
+                        @s
 
-                </tr>
-            }*@
+                    </tr>
+                }*@
 
 
         </tbody>

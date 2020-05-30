@@ -1,8 +1,9 @@
 ﻿@page "/"
 
+@using BlazorApp1.Pages
 @using BlazorApp1.Data
 
-<Counter reqFields="@ReqFields" />
+<ReqHead reqFields="@ReqFields" />
 <ResBody results="@Results" />
 
 @code {

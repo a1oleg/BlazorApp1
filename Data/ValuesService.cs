@@ -12,28 +12,26 @@ namespace BlazorApp1.Data
     {
         static string local = "http://localhost:4001/graphql";
 
+        GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
+
+        public string qu  { get; set; }
+        public ValuesService(string q)
+        {
+            qu = q;
+        }
         public async Task<Rootobject> GetAsync()
         {                        
-            GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
+            
 
-            var request = new GraphQLRequest
-       //     {
-       //         Query = @"
-			    //query Values($desc: String!) {
-       //             Values(desc: $desc)
-       //           }",
-       //         OperationName = "Values",
-       //         Variables = new
-       //         {
-       //             desc = "Виды работ"
-       //         }
-       //     };
+            var request = new GraphQLRequest   
 
             {
-                Query = @"
-			    query Dirs {
-                      Dirs
-                  }",
+                
+                Query = qu,
+       //         @"
+			    //query Dirs {
+       //               Dirs
+       //           }",
                 OperationName = "Dirs"
             };
 
