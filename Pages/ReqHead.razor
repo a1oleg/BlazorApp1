@@ -1,36 +1,19 @@
 ﻿@page "/counter"
 @using BlazorApp1.Data
-@inject ValuesService VService
 
-@if (results == null)
+
+@foreach (string s in reqFields.Keys)
 {
-    <p><em>Loading...</em></p>
+    @s
+
+    <FormsValidation route="DirValues"/>
 }
-else
-{
-    @foreach (string s in reqFields.Keys)
-    {
-        @s
-
-    }
-    <FormsValidation dirs="@results.Data.Dirs" OnSubmitCallback="@AddNewDir" />
-
-
-}
+<FormsValidation route="Dirs" OnSubmitCallback="@AddNewDir" />
 
 @code {
 
-    public Rootobject results { get; set; }
-    [Parameter]
-    public Dictionary<string, string> reqFields { get; set; }
 
-
-    protected override async Task OnInitializedAsync()
-    {
-        results = await VService.GetAsync();
-
-    }
-
+    public Dictionary<string, string> reqFields { get; set; } = new Dictionary<string, string>();
 
 
     //[Parameter]

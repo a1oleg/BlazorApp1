@@ -3,23 +3,14 @@
 @using BlazorApp1.Pages
 @using BlazorApp1.Data
 
-<ReqHead reqFields="@ReqFields" />
+<ReqHead />
 <ResBody results="@Results" />
 
 @code {
-    public static string qu = @"query Dirs {
-                               Dirs
-                               }";
-
-    private Dictionary<string, string> ReqFields = new Dictionary<string, string>();
+    
     private List<Rootobject> Results = new List<Rootobject>();
 
 
-
-    private void AddReqField(string item)
-    {
-        ReqFields.Add(item,item);
-    }
 }
 
 

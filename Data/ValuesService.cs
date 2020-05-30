@@ -11,18 +11,16 @@ namespace BlazorApp1.Data
 {
     public class ValuesService
     {        
-        public async Task<Rootobject> GetAsync()
+        public async Task<Rootobject> GetAsync(string route)
         {
             string local = "http://localhost:4001/graphql";
 
             GraphQLHttpClient graphQLClient = new GraphQLHttpClient(local, new NewtonsoftJsonSerializer());
 
 
-            var request = new GraphQLRequest   
-
-            {
-                
-                Query = Index.qu,
+            GraphQLRequest request = new GraphQLRequest
+            {                
+                Query = route,
        //         @"
 			    //query Dirs {
        //               Dirs
