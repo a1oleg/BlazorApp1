@@ -20,12 +20,12 @@ namespace BlazorApp1.Data
 
             GraphQLRequest request = new GraphQLRequest
             {                
-                Query = route,
+                Query = route//,
        //         @"
 			    //query Dirs {
        //               Dirs
        //           }",
-                OperationName = "Dirs"
+                //OperationName = "Dirs"
             };
 
 

@@ -13,6 +13,12 @@ namespace BlazorApp1.Data
     {
         public object Values { get; set; }
         public List<string> Dirs { get; set; }
+        public List<Dir> Dir { get; set; }
+    }
+    public class Dir
+    {
+        public string description { get; set; }
+        public List<string> Values { get; set; }
     }
 
 }

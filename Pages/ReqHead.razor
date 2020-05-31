@@ -6,9 +6,10 @@
 {
     @s
 
-    <FormsValidation route="DirValues"/>
+    <ValueForm dirName=@s OnSubmitCallback="@AddValue"/>
 }
-<FormsValidation route="Dirs" OnSubmitCallback="@AddNewDir" />
+
+<DirForm OnSubmitCallback="@AddDir" />
 
 @code {
 
@@ -16,13 +17,15 @@
     public Dictionary<string, string> reqFields { get; set; } = new Dictionary<string, string>();
 
 
-    //[Parameter]
-    //public EventCallback<string> OnClickCallback { get; set; }
-
-    void AddNewDir(string item)
+    void AddDir(string item)
     {
-        reqFields.Add(item, item);
-        //OnClickCallback.InvokeAsync();
+        reqFields[item] = item;
+
+    }
+
+    void AddValue(string item)
+    {
+        reqFields.Add(item, null);
     }
 
 

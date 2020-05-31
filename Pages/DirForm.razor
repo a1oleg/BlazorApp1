@@ -1,0 +1,57 @@
+﻿@page "/DirForm"
+@using BlazorApp1.Data
+@inject ValuesService VService
+
+@if (results != null && results.Data.Dir != null)
+{
+    <EditForm Model="@exampleModel" OnSubmit="HandleValidSubmit">
+        @*<DataAnnotationsValidator />
+            <ValidationSummary />*@
+        <p>
+            <label>
+                @*Справочники:*@
+                <InputSelect @bind-Value="@item">
+                    <option value="">Выберите справочник...</option>
+                    @foreach (string s in results.Data.Dir.Select(d => d.description))//.Select(d => d.description)
+                    {
+                        <option value=@s>@s</option>
+                    }
+                    /**/
+                </InputSelect>
+            </label>
+        </p>
+        <button type="submit">Выбрать</button>
+    </EditForm>
+}
+
+@code {
+    private ExampleModel exampleModel = new ExampleModel();
+
+    public string qu = @"{
+        Dir{
+          description
+        }
+      }";
+
+    
+
+    public Rootobject results { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        results = await VService.GetAsync(qu);
+    }
+
+
+
+
+    private string item;
+
+    private void HandleValidSubmit()
+    {
+        OnSubmitCallback.InvokeAsync(item);
+    }
+
+    [Parameter]
+    public EventCallback<string> OnSubmitCallback { get; set; }
+    }
