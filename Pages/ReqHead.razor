@@ -1,15 +1,18 @@
 ﻿@page "/counter"
 @using BlazorApp1.Data
 
-
-@foreach (string s in reqFields.Keys)
+@if (reqFields.Keys.Any())
 {
-    @s
+    @foreach (string s in reqFields.Keys)
+    {
+        @s
 
-    <ValueForm dirName=@s OnSubmitCallback="@AddValue"/>
+        <ValueForm dirName=@s OnSubmitCallback="@AddValue"/>
+    }
 }
+<ValueForm OnSubmitCallback="@AddValue" />
 
-<DirForm OnSubmitCallback="@AddDir" />
+@*<DirForm OnSubmitCallback="@AddDir" />*@
 
 @code {
 

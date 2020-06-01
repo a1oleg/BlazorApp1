@@ -1,6 +1,12 @@
 ﻿@page "/ValueForm"
 @using BlazorApp1.Data
+@using GraphQL;
 @inject ValuesService VService
+
+@if (results != null && results.Errors != null)
+{
+    Console.WriteLine(results.Errors);
+}
 
 @if (results != null && results.Data.Dir != null)
 {
@@ -12,10 +18,14 @@
                 @dirName
                 <InputSelect @bind-Value="@item">
                     <option value="">Выберите значение...</option>
-                    @foreach (string s in results.Data.Dir.Select(d => d.description))//.Select(d => d.description)
+                    <option>@results.Data.Dir.description</option>
+                    @*@foreach (string s in results.Data.Dir.First().Values.Select(v => v.TXTLG))//.Select(d => d.description)
                     {
                         <option value=@s>@s</option>
-                    }
+                        }*@
+                    /**/
+                    /**/
+                    /**/
                     /**/
                 </InputSelect>
             </label>
@@ -30,20 +40,31 @@
     [Parameter]
     public string dirName { get; set; }
 
-
-    public string qu = @"{
-        Dir{
-          description
-        }
-      }";
-
+    public GraphQLRequest getQu()
+    {
+        return new GraphQLRequest
+        {
+            Query = @"
+         query DirValues($desc: String!){
+               Dir(name: $desc) {
+                description
+                }
+            }
+        }",
+            OperationName = "DirValues",
+            Variables = new
+            {
+                desc = "OPER"
+            }
+        };
+    }
 
 
     public Rootobject results { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        results = await VService.GetAsync(qu);
+        results = await VService.GetAsync(getQu());
     }
 
 
@@ -58,4 +79,4 @@
 
     [Parameter]
     public EventCallback<string> OnSubmitCallback { get; set; }
-    }
+}

@@ -1,5 +1,6 @@
 ﻿@page "/DirForm"
 @using BlazorApp1.Data
+@using GraphQL;
 @inject ValuesService VService
 
 @if (results != null && results.Data.Dir != null)
@@ -12,10 +13,13 @@
                 @*Справочники:*@
                 <InputSelect @bind-Value="@item">
                     <option value="">Выберите справочник...</option>
-                    @foreach (string s in results.Data.Dir.Select(d => d.description))//.Select(d => d.description)
+                    
+                    @*@foreach (string s in results.Data.Dir.Select(d => d.description))//.Select(d => d.description)
                     {
                         <option value=@s>@s</option>
-                    }
+                        }*@
+                    /**/
+                    /**/
                     /**/
                 </InputSelect>
             </label>
@@ -27,19 +31,25 @@
 @code {
     private ExampleModel exampleModel = new ExampleModel();
 
-    public string qu = @"{
-        Dir{
-          description
-        }
-      }";
+    public GraphQLRequest getQu()
+    {
+        return new GraphQLRequest
+        {
+            Query = @"{
+                    Dir{
+                      description
+                    }
+                  }"
+        };
+    }
 
-    
+
 
     public Rootobject results { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        results = await VService.GetAsync(qu);
+        results = await VService.GetAsync(getQu());
     }
 
 
@@ -54,4 +64,4 @@
 
     [Parameter]
     public EventCallback<string> OnSubmitCallback { get; set; }
-    }
+}
